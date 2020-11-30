@@ -1,0 +1,16 @@
+<h1>文章列表</h1>
+
+<%= form_for(@post, url: board_posts_path(@board)) do |form| %>
+    
+    <div class="field">
+        <%= form.label :title%>
+        <%= form.text_field :title%>
+    </div>
+
+    <div class="field">
+    <%= form.label :content%>
+    <%= form.text_field :content%>
+    </div>
+    <%= form.submit%>
+
+<% end %>

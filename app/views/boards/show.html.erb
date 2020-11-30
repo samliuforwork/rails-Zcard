@@ -1,0 +1,10 @@
+<h1><%= @board.title %></h1>
+<%= link_to "新增文章", new_board_post_path(@board) %>
+
+<% @posts.each do |post|%>
+    <div class="article">
+    <li>文章標題：<%= link_to post.title, post %></li>
+    <li>文章內容：<%= post.content%></li>
+    </div>
+    <br>
+<% end %>

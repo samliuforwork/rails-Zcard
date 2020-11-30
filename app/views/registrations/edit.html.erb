@@ -1,0 +1,16 @@
+<h1>編輯個人資料</h1>
+
+<%= form_for(current_user, url: users_path, method: 'put') do |form| %>
+
+  <div class="fields">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="fields">
+    <%= form.label :nickname, '暱稱' %>
+    <%= form.text_field :nickname %>
+  </div>
+
+  <%= form.submit '更新' %>
+<% end %>
