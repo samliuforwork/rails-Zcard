@@ -47,6 +47,20 @@ class PostsController < ApplicationController
         end
     end
 
+    def favorite
+      post = Post.find(params[:id])
+# 我想知道這篇文章是否在我的最愛裡面
+      if current_user.favorite?
+      #↓移除我的最愛
+        current_user.my_favorites.destroy(post)
+        render json: { status: 'remove' }
+      else
+        current_user.my_posts << post
+        render json: { status: 'added' }
+      # ↑我要把這篇加到我的最愛
+      end
+    end
+
 
     private
     def set_board

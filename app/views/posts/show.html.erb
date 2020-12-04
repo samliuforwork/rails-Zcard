@@ -1,5 +1,15 @@
 <h2><%= @post.user.nickname %></h2>
 <h1><%= @post.title %></h1>
+<h2>
+ <% if user_signed_in? %>
+  <%= link_to '#', id: 'favorite_btn', data: { id: @post.id } do %>
+    <% if current_user.favorite?(@post) %>
+      <i class="fas fa-heart"></i>
+    <% else %>
+      <i class="far fa-heart"></i>
+    <% end %>
+  <% end %>
+</h2>
 
 <%= link_to '編輯', edit_post_path(@post) if @post.owned_by?(current_user) %>
 
@@ -7,20 +17,20 @@
   <%= simple_format(@post.content) %>
 </article>
 
-  <%= form_for(@comment, url: post_comments_path(@post)) do |f| %>
+  <%= form_for(@comment, url: post_comments_path(@post), remote: true) do |f| %>
     <%= f.text_area :content, placeholder: '請輸入留言' %>
     <%= f.submit '送出' %>
 
 <% end %>
 
-<ul>
-<% @comments.each do |comment| %>
-  <li>
-  [<%= comment.user.nickname %>]
-  <%= comment.content %>
-  <%= link_to "刪除", comment, method: 'delete', data: { confirm: '確認?' }%>
-  </li>
-<% end %>
+<ul class="comment">
+<%= render @comments %>
+
+# <ul>
+# 避免在迴圈中做render，避免效能變差
+# <% @comments.each do |comment| %>
+# <%= render "comments/comment", comment: comment %>
+# <% end %>
 
 <%= link_to '回上頁', :back %>
 

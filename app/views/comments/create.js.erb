@@ -1,0 +1,7 @@
+var comment_area = document.querySelector('.comment');
+comment_area.innerHTML = "<%= j render('comments/comment', comment: @comment) %>" + comment_area.innerHTML;
+# 為了不要讓每次刪除留言都要經過redirect_to(或者F5)來更新頁面，上面這個使用JS方法(並且render了_commemt.html.erb頁面)，使得使用者一發出留言就可立即得到回饋。
+# 抓innerHTML，並且把新留言疊上去
+
+# ↓把所打的留言在留言板框內刪除
+document.querySelector('#comment_content').value = '';

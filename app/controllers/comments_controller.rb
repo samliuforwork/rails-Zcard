@@ -18,6 +18,7 @@ class CommentsController < ApplicationController
       comment = current_user.comments.find(params[:id])
       #下面這句翻譯，是從comment裡面撈資料，有可能砍到別人的
       # comment = Comment.find(params[:id])
+      # 為了維持一致性，把update改成destroy
       comment.destroy
       redirect_to comment.post, notice: '留言已經刪除'
     end
